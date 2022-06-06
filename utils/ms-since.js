@@ -1,1 +1,0 @@
-export function msSince(when = 0) { return +new Date() - when; }

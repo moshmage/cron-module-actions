@@ -4,12 +4,11 @@
   "description": "cron helper that imports a given folder",
   "type": "module",
   "bin": {
-    "cma": "bin/cma.mjs"
+    "cma": "cma.mjs"
   },
   "files": [
-    "src",
-    "utils",
-    "bin"
+    "cma.mjs",
+    "cron-module-actions.js"
   ],
   "scripts": {
     "test": "echo \"no test specified\" && exit 0"

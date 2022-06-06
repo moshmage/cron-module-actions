@@ -2,7 +2,8 @@ import {readdirSync} from 'fs';
 import {resolve} from 'path';
 import {platform} from 'os';
 import {schedule as Schedule} from 'node-cron';
-import {msSince} from "../utils/ms-since.js";
+
+function msSince(when = 0) { return +new Date() - when; }
 
 export async function cronModuleActions(modulePath = "") {
   const start = +new Date();
