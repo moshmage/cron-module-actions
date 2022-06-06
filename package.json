@@ -4,10 +4,10 @@
   "description": "cron helper that imports a given folder",
   "type": "module",
   "bin": {
-    "cma": "cma.mjs"
+    "cma": "cma.js"
   },
   "files": [
-    "cma.mjs",
+    "cma.js",
     "cron-module-actions.js"
   ],
   "scripts": {
