@@ -6,6 +6,11 @@
   "bin": {
     "cma": "bin/cma.mjs"
   },
+  "files": [
+    "src",
+    "utils",
+    "bin"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
