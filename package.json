@@ -1,6 +1,6 @@
 {
   "name": "cron-module-actions",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "cron helper that imports a given folder",
   "type": "module",
   "bin": {
