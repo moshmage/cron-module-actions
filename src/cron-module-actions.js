@@ -19,7 +19,7 @@ export async function cronModuleActions(modulePath = "") {
       const filePath = resolve(modulePath, module);
       const {name, description, schedule, action, author = ""} = await import((platform() === "win32" && 'file://' || '') + filePath);
       console.log(`${name} (${module} ${msSince(past)}ms)\n\t${schedule}\t${description}\t${author}`);
-      loaded.push(Schedule(schedule, action));
+      loaded.push({name, schedule: Schedule(schedule, action), pattern: schedule});
     } catch (e) {
       console.log(`-`.repeat(20));
       console.log(`Error loading ${module} ${msSince(past)}ms)`);
@@ -28,5 +28,7 @@ export async function cronModuleActions(modulePath = "") {
     }
   }
 
-  console.log(`Loaded ${loaded.length} module(s) (${msSince(start)}ms)`)
+  console.log(`Loaded ${loaded.length} module(s) (${msSince(start)}ms)`);
+
+  return loaded;
 }

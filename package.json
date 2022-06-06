@@ -1,7 +1,7 @@
 {
   "name": "cron-module-actions",
   "version": "0.0.1",
-  "description": "cli tool to schedule cron js modules",
+  "description": "cron helper that imports a given folder",
   "type": "module",
   "bin": {
     "cma": "bin/cma.mjs"
@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/moshmage/cron-module-actions#readme",
   "dependencies": {
+    "cron-parser": "^4.4.0",
     "node-cron": "^3.0.1",
     "uuid": "^8.3.2"
   }
