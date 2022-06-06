@@ -43,7 +43,7 @@ function kd(key, description) { return {key, description}; }
   cronModuleActions(folderPath)
     .then(loaded => {
       actions = loaded
-      console.log('-'.repeat(10))
+      console.log('-'.repeat(25))
       console.log(`Press [e]xit, [s]chedules, [h]elp`);
     });
 
