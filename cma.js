@@ -14,8 +14,6 @@ import {cronModuleActions} from "./index.js";
     process.exit(1)
   }
 
-  let actions;
-
   const loaded = [];
   const start = Date.now();
   const modulePath = process.argv[2];
@@ -46,8 +44,10 @@ import {cronModuleActions} from "./index.js";
       return process.exit(1);
 
     if (key === 110) // n
-      return actions.forEach(({name, pattern}) => {
-        console.log(name, `next @`, parser.parseExpression(pattern).next().toDate())
+      return loaded.forEach(({name, schedule}) => {
+        const next = parser.parseExpression(schedule).next().toISOString();
+        const left = (+new Date(next) - Date.now()) / 1000;
+        console.log(name, `in ${left}s @`, parser.parseExpression(schedule).next().toDate())
       })
 
     console.log(`Press [e]xit, [n]ext schedules, [h]elp`);
