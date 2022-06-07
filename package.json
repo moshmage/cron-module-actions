@@ -8,7 +8,8 @@
   },
   "files": [
     "cma.js",
-    "cron-module-actions.js"
+    "utils.js",
+    "index.js"
   ],
   "scripts": {
     "test": "echo \"no test specified\" && exit 0"
@@ -20,7 +21,8 @@
   "keywords": [
     "cron",
     "js",
-    "module"
+    "module",
+    "cli"
   ],
   "author": "moshmage@gmail.com",
   "license": "ISC",
