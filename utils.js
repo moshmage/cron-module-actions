@@ -1,0 +1,1 @@
+export const since = (when = 0) => Date.now() - when;
