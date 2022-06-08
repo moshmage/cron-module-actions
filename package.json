@@ -5,10 +5,10 @@
   "type": "module",
   "exports": "./index.js",
   "bin": {
-    "cma": "cma.js"
+    "cma": "bin/cma.js"
   },
   "files": [
-    "cma.js",
+    "bin/cma.js",
     "utils.js",
     "index.js"
   ],

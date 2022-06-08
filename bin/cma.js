@@ -1,10 +1,10 @@
 import parser from "cron-parser";
-import pkg from './package.json' assert {type: "json"};
+import pkg from '../package.json' assert {type: "json"};
 import {readdirSync} from "fs";
 import {resolve} from "path";
 import {platform} from "os";
-import {since} from "./utils.js";
-import {cronModuleActions} from "./index.js";
+import {since} from "../utils.js";
+import {cronModuleActions} from "../index.js";
 
 (async function cma() {
   console.log(`CRON Module Actions v${pkg.version}`);
