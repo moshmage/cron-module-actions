@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import parser from "cron-parser";
 import pkg from '../package.json' assert {type: "json"};
 import {readdirSync} from "fs";
