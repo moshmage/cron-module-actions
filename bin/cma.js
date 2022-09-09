@@ -38,22 +38,25 @@ import {cronModuleActions} from "../index.js";
 
   console.log(`Loaded ${loaded.length} module(s) (${since(start)}ms)`);
 
-  process.stdin.setRawMode(true);
-  process.stdin.resume();
-  process.stdin.on('data', (data) => {
-    const [key] = [...data];
-    if ([3, 24, 101].includes(key)) // CTRL+C, CTRL+X, e
-      return process.exit(1);
-
-    if (key === 110) // n
-      return loaded.forEach(({name, schedule}) => {
-        const next = parser.parseExpression(schedule).next().toISOString();
-        const left = (+new Date(next) - Date.now()) / 1000;
-        console.log(name, `in ${left}s @`, parser.parseExpression(schedule).next().toDate())
-      })
-
+  if (process.stdin.isTTY) {
     console.log(`Press [e]xit, [n]ext schedules, [h]elp`);
-  });
+    process.stdin.setRawMode(true);
+    process.stdin.resume();
+    process.stdin.on('data', (data) => {
+      const [key] = [...data];
+      if ([3, 24, 101].includes(key)) // CTRL+C, CTRL+X, e
+        return process.exit(1);
+
+      if (key === 110) // n
+        return loaded.forEach(({name, schedule}) => {
+          const next = parser.parseExpression(schedule).next().toISOString();
+          const left = (+new Date(next) - Date.now()) / 1000;
+          console.log(name, `in ${left}s @`, parser.parseExpression(schedule).next().toDate())
+        })
+
+      console.log(`Press [e]xit, [n]ext schedules, [h]elp`);
+    });
+  }
 
   cronModuleActions(loaded);
 
