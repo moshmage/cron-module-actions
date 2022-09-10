@@ -39,7 +39,9 @@ import {cronModuleActions} from "../index.js";
   console.log(`Loaded ${loaded.length} module(s) (${since(start)}ms)`);
 
   if (process.stdin.isTTY) {
+    console.log('-'.repeat(25))
     console.log(`Press [e]xit, [n]ext schedules, [h]elp`);
+
     process.stdin.setRawMode(true);
     process.stdin.resume();
     process.stdin.on('data', (data) => {
@@ -54,13 +56,11 @@ import {cronModuleActions} from "../index.js";
           console.log(name, `in ${left}s @`, parser.parseExpression(schedule).next().toDate())
         })
 
-      console.log(`Press [e]xit, [n]ext schedules, [h]elp`);
+      console.log('-'.repeat(25))
+      console.log(`Press [e]xit, [n]ext schedules`);
     });
   }
 
   cronModuleActions(loaded);
-
-  console.log('-'.repeat(25))
-  console.log(`Press [e]xit, [n]ext schedules, [h]elp`);
 
 })();
