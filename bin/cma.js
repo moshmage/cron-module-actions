@@ -50,11 +50,11 @@ import {cronModuleActions} from "../index.js";
         return process.exit(1);
 
       if (key === 110) // n
-        return loaded.forEach(({name, schedule}) => {
+        return (console.log('-'.repeat(25)), loaded.forEach(({name, schedule}) => {
           const next = parser.parseExpression(schedule).next().toISOString();
           const left = (+new Date(next) - Date.now()) / 1000;
           console.log(name, `in ${left}s @`, parser.parseExpression(schedule).next().toDate())
-        })
+        }))
 
       console.log('-'.repeat(25))
       console.log(`Press [e]xit, [n]ext schedules`);

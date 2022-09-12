@@ -14,14 +14,19 @@ import {schedule as Schedule} from "node-cron";
  * @param {CModule[]} modules
  */
 export function cronModuleActions(modules = []) {
-  const namePattern = ({name, schedule: pattern}) => ({name, pattern,})
+  const namePattern = ({name, schedule: pattern}) => ({name, pattern,});
+  const taskRunner = (module) => (t) => {
+    if (process?.env?.NODE_ENV?.includes('dev'))
+      console.log(`Calling ${module.name} task at ${t.toISOString()}`);
+    module.action();
+  }
 
   const loaded = [];
 
   for (const module of modules) {
     try {
       loaded.push(namePattern(module));
-      Schedule(module.schedule, module.action);
+      Schedule(module.schedule, taskRunner(module));
     } catch (e) {
       console.error(e);
     }
