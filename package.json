@@ -5,7 +5,7 @@
   "type": "module",
   "exports": {
     ".": {
-      "require": "index.cjs.js",
+      "require": "index-cjs.js",
       "import": "index.js"
     }
   },
