@@ -1,12 +1,9 @@
 #!/usr/bin/env node
 
 import parser from "cron-parser";
-import pkg from '../package.json' assert {type: "json"};
-import {readdirSync} from "fs";
-import {resolve} from "path";
-import {platform} from "os";
+import pkg from '../package.json' assert {type: 'json'};
 import {since} from "../utils.js";
-import {cronModuleActions} from "../index.js";
+import {cronModuleActions, getModules} from "../index.js";
 
 (async function cma() {
   console.log(`CRON Module Actions v${pkg.version}`);
@@ -16,25 +13,8 @@ import {cronModuleActions} from "../index.js";
     process.exit(1)
   }
 
-  const loaded = [];
   const start = Date.now();
-  const modulePath = process.argv[2];
-  const contents = readdirSync(modulePath);
-  const modules = contents.filter(file => file.match(/\.m?js$/g));
-
-  console.log(`Found ${modules.length} module(s)`)
-
-  for (const module of modules) {
-    const past = +new Date();
-    try {
-      const filePath = resolve(modulePath, module);
-      const {name, description = "", schedule, action, author = ""} = await import((platform() === "win32" && 'file://' || '') + filePath);
-      console.log(`${name} (${module} ${since(past)}ms)\n\t${schedule}\t${description}\t${author}`);
-      loaded.push({name, schedule, action});
-    } catch (e) {
-      console.error(e);
-    }
-  }
+  const loaded = await getModules(process.argv[2]);
 
   console.log(`Loaded ${loaded.length} module(s) (${since(start)}ms)`);
 

@@ -1,4 +1,8 @@
 import {schedule as Schedule} from "node-cron";
+import {readdirSync} from "fs";
+import {resolve} from "path";
+import {platform} from "os";
+import {since} from "./utils.js";
 
 /**
  * @typedef {Object} CModule
@@ -27,6 +31,30 @@ export function cronModuleActions(modules = []) {
     try {
       loaded.push(namePattern(module));
       Schedule(module.schedule, taskRunner(module));
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  return loaded;
+}
+
+export async function getModules(modulePath = "", muted = false) {
+  const loaded = [];
+  const contents = readdirSync(modulePath);
+  const modules = contents.filter(file => file.match(/\.m?js$/g));
+
+  if (!muted)
+    console.log(`Found ${modules.length} module(s)`)
+
+  for (const module of modules) {
+    const past = +new Date();
+    try {
+      const filePath = resolve(modulePath, module);
+      const {name, description = "", schedule, action, author = ""} = await import((platform() === "win32" && 'file://' || '') + filePath);
+      if (!muted)
+        console.log(`${name} (${module} ${since(past)}ms)\n\t${schedule}\t${description}\t${author}`);
+      loaded.push({name, schedule, action});
     } catch (e) {
       console.error(e);
     }
