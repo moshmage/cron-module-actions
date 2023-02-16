@@ -29,3 +29,15 @@ export function action() {
 $ cma ./path/to/folder/with/modules
 ```
 
+### Alternatively you can import the cma by hand on your code
+```javascript
+
+cronModuleActions(
+  /* only .js modules will be imported */
+  await getModules(`file/to/modules`),
+
+  /* muted, if false will console.log information */
+  true
+)
+
+```
