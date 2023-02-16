@@ -16,7 +16,7 @@
     "bin/cma.js",
     "utils.js",
     "index.js",
-    "index-cjs.js"
+    "index.cjs"
   ],
   "scripts": {
     "roll": "rollup index.js --file index.cjs --format cjs",
