@@ -3,16 +3,25 @@
   "version": "0.1.7",
   "description": "cron helper that imports a given folder",
   "type": "module",
-  "exports": "./index.js",
+  "exports": {
+    ".": {
+      "require": "index.cjs.js",
+      "import": "index.js"
+    }
+  },
   "bin": {
     "cma": "bin/cma.js"
   },
   "files": [
     "bin/cma.js",
     "utils.js",
-    "index.js"
+    "index.js",
+    "index-cjs.js"
   ],
   "scripts": {
+    "roll": "rollup index.js --file index-cjs.js --format cjs",
+    "prerelease": "npm run roll",
+    "release": "np",
     "test": "echo \"no test specified\" && exit 0"
   },
   "repository": {
@@ -35,5 +44,8 @@
     "cron-parser": "^4.4.0",
     "node-cron": "^3.0.1",
     "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "rollup": "^3.15.0"
   }
 }
